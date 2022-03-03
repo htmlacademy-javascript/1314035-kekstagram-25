@@ -1,8 +1,3 @@
-function checkLengthString(string, max) {
-  return (string.length <= max);
-}
-checkLengthString();
-
 const DESCRIPTIONS = [
   'Девочка с шариками',
   'Котята  спят в корзинке',
@@ -32,6 +27,16 @@ const NAMES = [
   'Денис',
 ];
 
+const SIMILAR_ITEM_COUNT = 25;
+
+const LIKES_MIN = 15;
+
+const LIKES_MAX = 200;
+
+const COMMENTS_MIN = 1;
+
+const COMMENTS_MAX = 5;
+
 const getRandomPositiveInteger = (a, b) => {
   const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
   const upper = Math.floor(Math.max(Math.abs(a), Math.abs(b)));
@@ -48,22 +53,18 @@ const createComment = (element, i) => ({
   name: getRandomArrayElement(NAMES)
 });
 
-const SIMILAR_COMMENT_COUNT = 5;
-
-const similarComments = Array.from({length: SIMILAR_COMMENT_COUNT}, createComment);
-similarComments();
-
 const createItem = (element, i) => ({
   id: i + 1,
   url: `photos/${  i + 1 }.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
-  likes: getRandomPositiveInteger(15, 200),
-  comments: Array.from({length: getRandomPositiveInteger(1, 5)}, createComment)
+  likes: getRandomPositiveInteger(LIKES_MIN, LIKES_MAX),
+  comments: Array.from({length: getRandomPositiveInteger(COMMENTS_MIN, COMMENTS_MAX)}, createComment)
 });
 
-createItem();
-
-const SIMILAR_ITEM_COUNT = 25;
-
 const similarItems = Array.from({length: SIMILAR_ITEM_COUNT}, createItem);
-similarItems();
+similarItems;
+
+function checkLengthString(string, max) {
+  return (string.length <= max);
+}
+checkLengthString('Привет', 140);
