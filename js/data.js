@@ -62,4 +62,4 @@ similarItems;
 
 checkLengthString('Привет', 140);
 
-export {createItem};
+export {similarItems};

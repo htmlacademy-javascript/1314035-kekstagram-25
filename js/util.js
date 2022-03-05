@@ -11,6 +11,4 @@ function checkLengthString(string, max) {
   return (string.length <= max);
 }
 
-export {getRandomPositiveInteger};
-export {getRandomArrayElement};
-export {checkLengthString};
+export {getRandomPositiveInteger, getRandomArrayElement, checkLengthString};

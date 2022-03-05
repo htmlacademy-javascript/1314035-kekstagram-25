@@ -1,3 +1,3 @@
-import {createItem} from './data.js';
+import {similarItems} from './data.js';
 
-createItem();
+similarItems();
