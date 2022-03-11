@@ -58,7 +58,6 @@ const createItem = (element, i) => ({
 });
 
 const similarItems = Array.from({length: SIMILAR_ITEM_COUNT}, createItem);
-similarItems;
 
 checkLengthString('Привет', 140);
 
