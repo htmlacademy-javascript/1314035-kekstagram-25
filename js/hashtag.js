@@ -21,57 +21,43 @@ const hashtagsInput = form.querySelector('.text__hashtags');
 // хэш-теги нечувствительны к регистру;
 hashtagsInput.value.toLowerCase();
 
-// строку из инпута превращем в массив (хэш-теги разделяются пробелами);
-const hashtagsArray = hashtagsInput.value.split(' ');
-
 // Функция проверки регулярного выражения
-function validateReg (array) {
+const validateReg = (value) => {
+  const hashtagsArray = value.split(' ');
   for (let i = 0; i < hashtagsArray.length; i++) {
-    if (!re.test(array[i])) {
+    if (!re.test(hashtagsArray[i])) {
       return false;
     }
   }
   return true;
-}
-validateReg(hashtagsArray);
+};
 
-pristine.addValidator(form.querySelector('.text__hashtags'), validateReg,'хэш-тег должен начинаться с #; хеш-тег должен состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т.п.), символы пунктуации (тире, дефис, запятая и т.п.), эмодзи и т.д.; хеш-тег не может состоять только из #; максимальная длина одного хэш-тега 20 символов, включая #;'
+pristine.addValidator(form.querySelector('.text__hashtags'), validateReg,
+  `хэш-тег должен начинаться с #;
+хеш-тег должен состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т.п.), символы пунктуации (тире, дефис, запятая и т.п.), эмодзи и т.д.;
+хеш-тег не может состоять только из #; максимальная длина одного хэш-тега 20 символов, включая #;
+хэш-теги разделяются пробелами;`
 );
 
 // Функция проверки длины массива (нельзя указать больше пяти хэш-тегов);
-function validateCount (array) {
-  if (array.length <= MAX_HASHTAG_NUMBERS) {
-    return true;
-  }
-  return false;
-}
-validateReg(hashtagsArray);
+const validateCount = (value) => {
+  const hashtagsArray = value.split(' ');
+  return hashtagsArray.length <= MAX_HASHTAG_NUMBERS;
+};
 
-pristine.addValidator(form.querySelector('.text__hashtags'), validateCount,'нельзя указать больше пяти хэш-тегов'
+pristine.addValidator(form.querySelector('.text__hashtags'), validateCount,'нельзя указывать больше пяти хэш-тегов'
 );
 
 // Функция проверки уникальности хештегов (один и тот же хэш-тег не может быть использован дважды);
-function validateUnique (value) {
-  const uniqueHashtags = Array.from(new Set(value));
-  if (uniqueHashtags.length === value.length) {
-    return true;
-  }
-  return false;
-}
-validateReg(hashtagsArray);
+const validateUnique = (value) => {
+  const hashtagsArray = value.split(' ');
+  const uniqueHashtags = Array.from(new Set(hashtagsArray));
+  return uniqueHashtags.length === hashtagsArray.length;
+};
 
 // Для описания валидации в JS вызываем метод .addValidator()
 pristine.addValidator(form.querySelector('.text__hashtags'), validateUnique,'один и тот же хэш-тег не может быть использован дважды'
 );
-
-// Общая функция валидности поля хештегов
-function validateHashtag () {
-  if (hashtagsInput.value === '') {
-    return true;
-  }
-  return validateReg(hashtagsArray) && validateCount(hashtagsArray) && validateUnique(hashtagsArray);
-}
-validateHashtag();
 
 // Добавляем обработчик на форму и вызываем метод .validate()
 form.addEventListener('submit', (evt) => {
