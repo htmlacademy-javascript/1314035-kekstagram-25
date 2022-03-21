@@ -34,21 +34,21 @@ const clearUserModalForm = () => {
 };
 
 //Функция для показа окна
-function openUserModal () {
+const openUserModal = () => {
   userModalFormElement.classList.remove('hidden');
   body.classList.add('modal-open');
 
   document.addEventListener('keydown', onUserModalEscKeydown);
-}
+};
 
 //Функция для скрытия окна
-function closeUserModal () {
+const closeUserModal = () => {
   userModalFormElement.classList.add('hidden');
   body.classList.remove('modal-open');
   clearUserModalForm();
 
   document.removeEventListener('keydown', onUserModalEscKeydown);
-}
+};
 
 userControlElement.addEventListener('change', () => {
   openUserModal();
