@@ -157,9 +157,9 @@ const filterParams = {
 
 // Слушатель события update, которое будет вызвано при изменении положения слайдера
 // С помощью метода .get() получаем актуальное значение слайдера и записываем его в свойство value поля, в которое записывается уровень эффекта
-effectsSliderElement.noUiSlider.on('update', (evt) => {
+effectsSliderElement.noUiSlider.on('update', () => {
   effectInputLevel.value = effectsSliderElement.noUiSlider.get();
-  UserImagePreview.style.filter = `${(filterParams[evt.target.value].filterName)}(${effectInputLevel.value})`;
+  UserImagePreview.style.filter = `${filterParams[effectInputsRadio.value].filterName}(${effectInputLevel.value})`;
 });
 
 // Обработчик на выбор радио-кнопки с эффектами
@@ -167,7 +167,7 @@ effectInputsRadio.addEventListener('change', (evt) => {
   effectsSliderElement.noUiSlider.updateOptions(filterParams[evt.target.value]['filterParameter']);
   effectsSliderElement.noUiSlider.updateOptions(filterParams[evt.target.value]['filterName']);
 });
-
+console.log(effectInputsRadio.value);
 // При выборе эффекта «Оригинал» слайдер скрывается
 // effectsSliderElement.noUiSlider.destroy();
 
@@ -241,4 +241,3 @@ effectInputsRadio.addEventListener('change', (evt) => {
     effectsSliderElement.noUiSlider.set(1);
   }
 });*/
-
