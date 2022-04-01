@@ -1,14 +1,11 @@
 import {UserImagePreview} from './scale-control.js';
 
-// Находим поле каждого эффекта (радиокнопку)
-/*const effectInputsRadio = document.querySelector('.effects__radio');*/
 // Находим родительский контейнер для всех эффектов
 const effectsContainer = document.querySelector('.img-upload__effects');
 // Находим слайдер
 const effectsSliderElement = document.querySelector('.effect-level__slider');
 //  Находим поле, в которое записывается уровень эффекта
 const effectInputLevel = document.querySelector('.effect-level__value');
-// Находим инпут, который выбран (текущий)
 
 // Создаем слайдер
 noUiSlider.create(effectsSliderElement, {
@@ -56,9 +53,9 @@ const filterParams = {
       },
     },
   },
-  'sepia': { //Имя фильтра из value
-    'filterName': 'sepia', //Имя фильтра для стилизации CSS
-    'filterParameter': {//Твой объект с параметрами noUiSliderа
+  'sepia': {
+    'filterName': 'sepia',
+    'filterParameter': {
       range: {
         min: 0,
         max: 1,
@@ -115,9 +112,9 @@ const filterParams = {
       format: {
         to: function (value) {
           if (Number.isInteger(value)) {
-            return `${value.toFixed(0)} + 'px'`;
+            return `${value.toFixed(0)}px`;
           }
-          return `${value.toFixed(1)} + 'px'`;
+          return `${value.toFixed(1)}px`;
         },
         from: function (value) {
           return parseFloat(value);
@@ -155,15 +152,23 @@ const filterParams = {
 effectsSliderElement.noUiSlider.on('update', () => {
   const effectInputCurrent = document.querySelector('[name="effect"]:checked');
   if (effectInputCurrent.value !== 'none') {
-    effectInputLevel.value = effectsSliderElement.noUiSlider.get();
-    UserImagePreview.style.filter = `${filterParams[effectInputCurrent.value].filterName}(${effectInputLevel.value}`;
+    const actualSliderValue = effectsSliderElement.noUiSlider.get();
+    effectInputLevel.value = parseInt(actualSliderValue, 10);
+    UserImagePreview.style.filter = `${filterParams[effectInputCurrent.value].filterName}(${actualSliderValue})`;
+  }
+  else {
+    effectsSliderElement.classList.add('hidden');
   }
 });
 
 // Обработчик на выбор радио-кнопки с эффектами
 effectsContainer.addEventListener('change', (evt) => {
-  effectsSliderElement.noUiSlider.updateOptions(filterParams[evt.target.value]['filterParameter']);
+  const effectInputCurrent = document.querySelector('[name="effect"]:checked');
+  if (effectInputCurrent.value !== 'none') {
+    effectsSliderElement.noUiSlider.updateOptions(filterParams[evt.target.value]['filterParameter']);
+    effectsSliderElement.classList.remove('hidden');
+  } else {
+    UserImagePreview.style.filter = '';
+    effectsSliderElement.classList.add('hidden');
+  }
 });
-
-// При выборе эффекта «Оригинал» слайдер скрывается
-// effectsSliderElement.noUiSlider.destroy();
