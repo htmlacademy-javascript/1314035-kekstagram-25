@@ -5,6 +5,9 @@ const re = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 // Находим форму для загрузки изображения на сайт
 const form = document.querySelector('.img-upload__form');
 
+//Находим поле хэштегов
+const hashtagsInput = form.querySelector('.text__hashtags');
+
 //Функция проверки
 const pristine = new Pristine(form, {
   classTo: 'img-upload__text', // Элемент, на который будут добавляться классы
@@ -14,9 +17,6 @@ const pristine = new Pristine(form, {
   errorTextTag: 'span', // Тег, который будет обрамлять текст ошибки
   errorTextClass: 'img-upload__error' // Класс для элемента с текстом ошибки
 });
-
-//Находим поле хэштегов
-const hashtagsInput = form.querySelector('.text__hashtags');
 
 // хэш-теги нечувствительны к регистру;
 hashtagsInput.value.toLowerCase();
