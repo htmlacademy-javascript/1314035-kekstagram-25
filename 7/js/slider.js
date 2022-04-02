@@ -1,4 +1,4 @@
-import {UserImagePreview} from './scale-control.js';
+import {userImagePreview} from './scale-control.js';
 
 // Находим родительский контейнер для всех эффектов
 const effectsContainer = document.querySelector('.img-upload__effects');
@@ -6,6 +6,8 @@ const effectsContainer = document.querySelector('.img-upload__effects');
 const effectsSliderElement = document.querySelector('.effect-level__slider');
 //  Находим поле, в которое записывается уровень эффекта
 const effectInputLevel = document.querySelector('.effect-level__value');
+// Находим подложку слайдера
+const effectLevelBack = document.querySelector('.effect-level');
 
 // Создаем слайдер
 noUiSlider.create(effectsSliderElement, {
@@ -42,9 +44,6 @@ const filterParams = {
       connect: 'lower',
       format: {
         to: function (value) {
-          if (Number.isInteger(value)) {
-            return value.toFixed(0);
-          }
           return value.toFixed(1);
         },
         from: function (value) {
@@ -65,9 +64,6 @@ const filterParams = {
       connect: 'lower',
       format: {
         to: function (value) {
-          if (Number.isInteger(value)) {
-            return value.toFixed(0);
-          }
           return value.toFixed(1);
         },
         from: function (value) {
@@ -88,10 +84,7 @@ const filterParams = {
       connect: 'lower',
       format: {
         to: function (value) {
-          if (Number.isInteger(value)) {
-            return `${value.toFixed(0)}%`;
-          }
-          return `${value.toFixed(1)}%`;
+          return `${value.toFixed(0)}%`;
         },
         from: function (value) {
           return parseFloat(value);
@@ -111,9 +104,6 @@ const filterParams = {
       connect: 'lower',
       format: {
         to: function (value) {
-          if (Number.isInteger(value)) {
-            return `${value.toFixed(0)}px`;
-          }
           return `${value.toFixed(1)}px`;
         },
         from: function (value) {
@@ -134,9 +124,6 @@ const filterParams = {
       connect: 'lower',
       format: {
         to: function (value) {
-          if (Number.isInteger(value)) {
-            return value.toFixed(0);
-          }
           return value.toFixed(1);
         },
         from: function (value) {
@@ -154,10 +141,10 @@ effectsSliderElement.noUiSlider.on('update', () => {
   if (effectInputCurrent.value !== 'none') {
     const actualSliderValue = effectsSliderElement.noUiSlider.get();
     effectInputLevel.value = parseInt(actualSliderValue, 10);
-    UserImagePreview.style.filter = `${filterParams[effectInputCurrent.value].filterName}(${actualSliderValue})`;
+    userImagePreview.style.filter = `${filterParams[effectInputCurrent.value].filterName}(${actualSliderValue})`;
   }
   else {
-    effectsSliderElement.classList.add('hidden');
+    effectLevelBack.classList.add('hidden');
   }
 });
 
@@ -166,9 +153,9 @@ effectsContainer.addEventListener('change', (evt) => {
   const effectInputCurrent = document.querySelector('[name="effect"]:checked');
   if (effectInputCurrent.value !== 'none') {
     effectsSliderElement.noUiSlider.updateOptions(filterParams[evt.target.value]['filterParameter']);
-    effectsSliderElement.classList.remove('hidden');
+    effectLevelBack.classList.remove('hidden');
   } else {
-    UserImagePreview.style.filter = '';
-    effectsSliderElement.classList.add('hidden');
+    userImagePreview.style.filter = '';
+    effectLevelBack.classList.add('hidden');
   }
 });
