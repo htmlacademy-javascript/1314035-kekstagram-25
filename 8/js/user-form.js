@@ -42,7 +42,7 @@ hashtagsInput.value.toLowerCase();
 const validateReg = (value) => {
   const hashtagsArray = value.split(' ');
   for (let i = 0; i < hashtagsArray.length; i++) {
-    if (!re.test(hashtagsArray[i])) {
+    if (!re.test(hashtagsArray[i]) && hashtagsArray[i] !== '') {
       return false;
     }
   }

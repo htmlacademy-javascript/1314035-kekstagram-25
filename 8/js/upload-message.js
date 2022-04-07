@@ -10,41 +10,37 @@ const showUploadMessage = (status) => {
   messageFragment.appendChild(messageElement);
   body.appendChild(messageFragment);
 
-  const messageContainer = document.querySelector(`.${status}`);
-  messageContainer.style.zIndex = 100;
-  messageTemplate.classList.remove('hidden');
-  body.classList.remove('modal-open');
-
-  document.addEventListener('keydown', (evt) => {
+  const onUploadMessageEscKeydown = (evt) => {
     if (isEscapeKey(evt)) {
       evt.preventDefault();
-      messageContainer.classList.add('hidden');
+      messageElement.classList.add('hidden');
+      document.removeEventListener('keydown', onUploadMessageEscKeydown);
+    }
+  };
+
+  const messageContainer = document.querySelector(`.${status}`);
+  messageContainer.style.zIndex = 100;
+  messageElement.classList.remove('hidden');
+  body.classList.remove('modal-open');
+  document.addEventListener('keydown', onUploadMessageEscKeydown);
+
+  const closeUploadMessage = () => {
+    messageElement.classList.add('hidden');
+    body.classList.remove('modal-open');
+  };
+
+  window.addEventListener('click', (evt) => {
+    if (evt.target.matches(`.${status}`)) {
+      closeUploadMessage();
+      document.removeEventListener('keydown', onUploadMessageEscKeydown);
     }
   });
 
   closeMessageButton.addEventListener('click', () => {
-    messageContainer.classList.add('hidden');
-    body.classList.remove('modal-open');
-    // clearUserModalForm();
-
-    // document.removeEventListener('keydown', onUserModalEscKeydown);
+    closeUploadMessage();
+    document.body.lastChild.remove();
+    document.removeEventListener('keydown', onUploadMessageEscKeydown);
   });
 };
 
 export {showUploadMessage};
-
-/*const onUploadMessageEscKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    closeUploadMessage();
-  }
-};
-
-function closeUploadMessage () {
-  messageContainer.classList.add('hidden');
-  document.removeEventListener('keydown', onUploadMessageEscKeydown);
-}
-
-closeMessageButton.addEventListener('click', () => {
-  closeUploadMessage();
-});*/
