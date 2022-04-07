@@ -20,10 +20,10 @@ const sendData = (onSuccess, onFail, body) => {
       } else {
         onFail('Не удалось отправить форму. Попробуйте ещё раз');
       }
-    });
-  /*.catch(() => {
+    })
+    .catch(() => {
       onFail('Не удалось отправить форму. Попробуйте ещё раз');
-    });*/
+    });
 };
 
 export {getData, sendData};

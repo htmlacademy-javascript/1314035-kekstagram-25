@@ -1,6 +1,6 @@
 import {isEscapeKey} from './util.js';
 import {hashtagsInput} from './user-form.js';
-import {userImagePreview, scaleControlInput} from './scale-control.js';
+import {userImagePreview} from './scale-control.js';
 import {effectLevelBack} from './slider.js';
 
 // Находим форму для загрузки изображения на сайт
@@ -30,10 +30,7 @@ const onUserModalEscKeydown = (evt) => {
 
 //Сбрасываем значение поля выбора файла #upload-file
 const clearUserModalForm = () => {
-  scaleControlInput.value = '';
-  userControlElement.value = '';
-  hashtagsInput.value = '';
-  commentInput.value = '';
+  form.reset();
   userImagePreview.style = '';
   effectLevelBack.classList.add('hidden');
 };
