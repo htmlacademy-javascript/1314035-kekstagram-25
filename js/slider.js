@@ -159,3 +159,5 @@ effectsContainer.addEventListener('change', (evt) => {
     effectLevelBack.classList.add('hidden');
   }
 });
+
+export {effectLevelBack};

@@ -1,7 +1,6 @@
 const SCALE_STEP = 25;
 const SCALE_MIN = 25;
 const SCALE_MAX = 100;
-const VALUE_DEFAULT = 100;
 
 // Находим кнопку "минус"
 const smallerScaleButton = document.querySelector('.scale__control--smaller');
@@ -11,8 +10,6 @@ const biggerScaleButton = document.querySelector('.scale__control--bigger');
 const scaleControlInput = document.querySelector('.scale__control--value');
 // Находим загруженное изображение
 const userImagePreview = document.querySelector('.img-upload__preview');
-
-scaleControlInput.value = VALUE_DEFAULT;
 
 // Обработчик нажатия на кнопку
 smallerScaleButton.addEventListener ('click', ()  => {
@@ -31,4 +28,4 @@ biggerScaleButton.addEventListener ('click', () => {
   }
 });
 
-export {userImagePreview};
+export {userImagePreview, scaleControlInput};
