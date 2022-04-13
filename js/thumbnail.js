@@ -1,3 +1,4 @@
+import {onThumbnailsClick} from './big-picture.js';
 // Находим контейнер для изображений от других пользователей
 const pictureContainer = document.querySelector('.pictures');
 
@@ -6,6 +7,7 @@ const pictureTemplate = document.querySelector('#picture').content.querySelector
 
 const makeThumbnails = (similarItems) => {
   const thumbnailFragment = document.createDocumentFragment();
+
   similarItems.forEach(({url, comments, likes}) => {
     const thumbnailUser = pictureTemplate.cloneNode(true);
     thumbnailUser.querySelector('.picture__img').src = url;
@@ -13,9 +15,11 @@ const makeThumbnails = (similarItems) => {
     thumbnailUser.querySelector('.picture__likes').textContent = likes;
     thumbnailFragment.appendChild(thumbnailUser);
   });
-  pictureContainer.innerHTML = '';
+  const userPictures = pictureContainer.querySelectorAll('.picture');
+  for (const pictures of userPictures) {
+    pictures.remove();
+  }
   pictureContainer.appendChild(thumbnailFragment);
-
 };
 
 export {makeThumbnails};
