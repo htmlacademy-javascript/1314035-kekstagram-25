@@ -8,7 +8,7 @@ import {setUserFormSubmit} from './user-form.js';
 import {getData} from './load.js';
 import {setButtonsContainerClick} from './filters.js';
 import {debounce} from './util.js';
-import {onThumbnailsClick} from './big-picture.js';
+// import {onThumbnailsClick} from './big-picture.js';
 
 const RERENDER_DELAY = 500;
 
@@ -17,6 +17,6 @@ getData((similarItems) => {
   setButtonsContainerClick(debounce(
     (sortedData) => makeThumbnails(sortedData),
     RERENDER_DELAY,
-  ));
+  ), similarItems);
 });
 setUserFormSubmit(closeUserModal);

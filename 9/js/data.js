@@ -1,4 +1,4 @@
-import {getRandomPositiveInteger} from './util.js';
+/*import {getRandomPositiveInteger} from './util.js';
 import {getRandomArrayElement} from './util.js';
 import {checkLengthString} from './util.js';
 
@@ -61,4 +61,4 @@ const similarItems = Array.from({length: SIMILAR_ITEM_COUNT}, createItem);
 
 checkLengthString('Привет', 140);
 
-export {similarItems};
+export {similarItems};*/
