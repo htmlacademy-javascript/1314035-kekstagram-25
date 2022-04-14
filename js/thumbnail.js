@@ -13,6 +13,9 @@ const makeThumbnails = (similarItems) => {
     thumbnailUser.querySelector('.picture__img').src = url;
     thumbnailUser.querySelector('.picture__comments').textContent = comments.length;
     thumbnailUser.querySelector('.picture__likes').textContent = likes;
+    thumbnailUser.addEventListener('click', () => {
+      onThumbnailsClick(url, comments, likes);
+    });
     thumbnailFragment.appendChild(thumbnailUser);
   });
   const userPictures = pictureContainer.querySelectorAll('.picture');
