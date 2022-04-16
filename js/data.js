@@ -1,9 +1,9 @@
-import {getRandomPositiveInteger} from './util.js';
+/*import {getRandomPositiveInteger} from './util.js';
 import {getRandomArrayElement} from './util.js';
 import {checkLengthString} from './util.js';
 
 
-/*const DESCRIPTIONS = [
+const DESCRIPTIONS = [
   'Девочка с шариками',
   'Котята  спят в корзинке',
   'Футболисты на тренировке',

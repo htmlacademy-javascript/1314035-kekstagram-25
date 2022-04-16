@@ -51,7 +51,7 @@ const onThumbnailsClick = (url, likes, comments, description) => {
   body.classList.add('modal-open');
   bigPictureContainer.querySelector('.big-picture__img img').src = url;
   bigPictureContainer.querySelector('.likes-count').textContent = likes;
-  bigPictureContainer.querySelector('.social__comment-count').textContent = comments.length;
+  bigPictureContainer.querySelector('.comments-count').textContent = comments.length;
   bigPictureContainer.querySelector('.social__caption').textContent = description;
   hideBlockComments();
   for (const comment of comments) {
