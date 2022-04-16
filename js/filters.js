@@ -36,6 +36,10 @@ const setButtonsContainerClick = (makeThumbnails, similarItems) => {
         break;
       case 'filter-default':
         sortedData = similarItems;
+        for (const button of userFiltersButtons) {
+          button.classList.remove('img-filters__button--active');
+        }
+        evt.target.classList.add('img-filters__button--active');
     }
     if (sortedData) {
       makeThumbnails(sortedData);

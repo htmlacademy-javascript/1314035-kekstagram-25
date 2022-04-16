@@ -8,13 +8,13 @@ const pictureTemplate = document.querySelector('#picture').content.querySelector
 const makeThumbnails = (similarItems) => {
   const thumbnailFragment = document.createDocumentFragment();
 
-  similarItems.forEach(({url, comments, likes}) => {
+  similarItems.forEach(({url, comments, likes, description}) => {
     const thumbnailUser = pictureTemplate.cloneNode(true);
     thumbnailUser.querySelector('.picture__img').src = url;
     thumbnailUser.querySelector('.picture__comments').textContent = comments.length;
     thumbnailUser.querySelector('.picture__likes').textContent = likes;
     thumbnailUser.addEventListener('click', () => {
-      onThumbnailsClick(url, comments, likes);
+      onThumbnailsClick(url, comments, likes, description);
     });
     thumbnailFragment.appendChild(thumbnailUser);
   });
