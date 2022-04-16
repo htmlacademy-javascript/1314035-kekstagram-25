@@ -4,6 +4,7 @@ const bigPictureContainer = document.querySelector('.big-picture');
 const body = document.querySelector('body');
 // const userPictures = document.querySelectorAll('.picture__img');
 const closeFullViewPictureElement = bigPictureContainer.querySelector('.big-picture__cancel');
+const blockComments = document.querySelector('.social__comments');
 
 const hideBlockComments = () => {
   bigPictureContainer.querySelector('.social__comment-count').classList.add('hidden');
@@ -27,6 +28,24 @@ const onbigPictureContainerEscKeydown = (evt) => {
   }
 };
 
+const createComment = (avatar,name,message) => {
+  const userCommentElement = document.createElement('li');
+  userCommentElement.classList.add('social__comment');
+
+  const userCommentImg = document.createElement('img');
+  userCommentImg.classList.add('social__picture');
+
+  const userCommentText = document.createElement('p');
+  userCommentImg.classList.add('social__text');
+
+  userCommentImg.src = avatar;
+  userCommentImg.alt = name;
+  userCommentText.textContent = message;
+  userCommentElement.appendChild(userCommentImg);
+  userCommentElement.appendChild(userCommentText);
+  blockComments.appendChild(userCommentElement);
+};
+
 const onThumbnailsClick = (url, likes, comments, description) => {
   bigPictureContainer.classList.remove('hidden');
   body.classList.add('modal-open');
@@ -35,6 +54,9 @@ const onThumbnailsClick = (url, likes, comments, description) => {
   bigPictureContainer.querySelector('.comments-count').textContent = comments.length;
   bigPictureContainer.querySelector('.social__caption').textContent = description;
   hideBlockComments();
+  for (const comment of comments) {
+    createComment(comment.avatar,comment.name,comment.message);
+  }
   document.addEventListener('keydown', onbigPictureContainerEscKeydown);
 };
 
