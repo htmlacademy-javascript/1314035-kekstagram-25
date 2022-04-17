@@ -12,10 +12,10 @@ const loaderCommentsButton = document.querySelector('.comments-loader');
 // Всего комментариев к фото
 const commentsCount = document.querySelector('.comments-count');
 
-const hideBlockComments = () => {
-  bigPictureContainer.querySelector('.social__comment-count').classList.add('hidden');
-  loaderCommentsButton.classList.add('hidden');
-};
+// const hideBlockComments = () => {
+//   commentsNumber.classList.add('hidden');
+//   loaderCommentsButton.classList.add('hidden');
+// };
 
 const closeFullViewPicture = () => {
   bigPictureContainer.classList.add('hidden');
@@ -51,8 +51,6 @@ const createComment = (avatar,name,message) => {
   userCommentElement.appendChild(userCommentText);
   blockComments.appendChild(userCommentElement);
 };
-// Сразу видимые комментарии
-
 
 const onThumbnailsClick = (url, likes, comments, description) => {
   const commentsNumber =  bigPictureContainer.querySelector('.social__comment-count');
@@ -68,8 +66,7 @@ const onThumbnailsClick = (url, likes, comments, description) => {
   for (const comment of comments.slice(0, currentComments)) {
     createComment(comment.avatar,comment.name,comment.message);
   }
-  // const title = `${Math.min(currentComments, comments.length)} из ${comments.length}`;
-  // commentsNumber.textContent = title;
+  // commentsNumber.innerHTML = '<div class="social__comment-count">`${commentsNumber}` из <span class="comments-count">`${commentsCount}`</span> комментариев</div>';
 
   loaderCommentsButton.addEventListener('click', () => {
     const commentsArray = comments.slice(currentComments, currentComments + 5);
