@@ -6,9 +6,15 @@ const body = document.querySelector('body');
 const closeFullViewPictureElement = bigPictureContainer.querySelector('.big-picture__cancel');
 const blockComments = document.querySelector('.social__comments');
 
+// / Кнопка загрузить еще (комментарии)
+const loaderCommentsButton = document.querySelector('.comments-loader');
+
+// Всего комментариев к фото
+const commentsCount = document.querySelector('.comments-count');
+
 const hideBlockComments = () => {
   bigPictureContainer.querySelector('.social__comment-count').classList.add('hidden');
-  bigPictureContainer.querySelector('.comments-loader').classList.add('hidden');
+  loaderCommentsButton.classList.add('hidden');
 };
 
 const closeFullViewPicture = () => {
@@ -45,18 +51,33 @@ const createComment = (avatar,name,message) => {
   userCommentElement.appendChild(userCommentText);
   blockComments.appendChild(userCommentElement);
 };
+// Сразу видимые комментарии
+
 
 const onThumbnailsClick = (url, likes, comments, description) => {
+  const commentsNumber =  bigPictureContainer.querySelector('.social__comment-count');
+  let currentComments = 5;
   bigPictureContainer.classList.remove('hidden');
   body.classList.add('modal-open');
   bigPictureContainer.querySelector('.big-picture__img img').src = url;
   bigPictureContainer.querySelector('.likes-count').textContent = likes;
   bigPictureContainer.querySelector('.comments-count').textContent = comments.length;
   bigPictureContainer.querySelector('.social__caption').textContent = description;
-  hideBlockComments();
-  for (const comment of comments) {
+  // hideBlockComments();
+  blockComments.innerHTML = '';
+  for (const comment of comments.slice(0, currentComments)) {
     createComment(comment.avatar,comment.name,comment.message);
   }
+  // const title = `${Math.min(currentComments, comments.length)} из ${comments.length}`;
+  // commentsNumber.textContent = title;
+
+  loaderCommentsButton.addEventListener('click', () => {
+    const commentsArray = comments.slice(currentComments, currentComments + 5);
+    currentComments += 5;
+    for (const comment of commentsArray) {
+      createComment(comment.avatar,comment.name,comment.message);
+    }
+  });
   document.addEventListener('keydown', onbigPictureContainerEscKeydown);
 };
 
