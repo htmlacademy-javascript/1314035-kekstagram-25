@@ -70,7 +70,6 @@ const onThumbnailsClick = (url, likes, comments, description) => {
   loaderCommentsButton.addEventListener('click', () => {
     const commentsArray = comments.slice(Math.min(currentComments, comments.length), Math.min(currentComments, comments.length) + SHOW_LIMIT);
     currentComments += 5;
-    showLoaderCommentsButton(currentComments,comments);
     commentsNumber.innerHTML = `<div class="social__comment-count">${Math.min(currentComments, comments.length)} из <span class="comments-count">${comments.length}</span> комментариев</div>`;
     for (const comment of commentsArray) {
       createComment(comment.avatar,comment.name,comment.message);
