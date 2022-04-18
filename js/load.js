@@ -1,8 +1,11 @@
+import {userFiltersElement} from './filters.js';
+
 const getData = (onSuccess) => {
   fetch('https://25.javascript.pages.academy/kekstagram/data')
     .then((response) => response.json())
     .then((thumbnails) => {
       onSuccess(thumbnails);
+      userFiltersElement.style.opacity = 1;
     });
 };
 

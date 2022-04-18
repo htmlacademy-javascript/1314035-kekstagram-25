@@ -101,4 +101,3 @@ const setUserFormSubmit = (onSuccess) => {
 };
 
 export {hashtagsInput, setUserFormSubmit};
-

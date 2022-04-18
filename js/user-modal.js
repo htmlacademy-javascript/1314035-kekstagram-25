@@ -20,6 +20,9 @@ const userModalCloseElement = form.querySelector('.img-upload__cancel');
 
 const commentInput = form.querySelector('.text__description');
 
+const preview = document.querySelector('.img-upload__preview img');
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+
 const onUserModalEscKeydown = (evt) => {
   // отменяем обработчик Esc при фокусе
   const selectedInput = document.activeElement;
@@ -53,6 +56,12 @@ const closeUserModal = () => {
 };
 
 userControlElement.addEventListener('change', () => {
+  const file = userControlElement.files[0];
+  const fileName = file.name.toLowerCase();
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+  if (matches) {
+    preview.src = URL.createObjectURL(file);
+  }
   openUserModal();
 });
 
