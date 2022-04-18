@@ -1,4 +1,5 @@
 import {onThumbnailsClick} from './big-picture.js';
+
 // Находим контейнер для изображений от других пользователей
 const pictureContainer = document.querySelector('.pictures');
 

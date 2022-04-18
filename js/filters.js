@@ -1,5 +1,3 @@
-// import {similarItems} from './data.js';
-
 const userFiltersElement = document.querySelector('.img-filters');
 const userFiltersButtons = document.querySelectorAll('.img-filters__button');
 
