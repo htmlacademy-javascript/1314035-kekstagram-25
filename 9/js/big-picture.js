@@ -42,6 +42,15 @@ const createComment = (avatar,name,message) => {
   blockComments.appendChild(userCommentElement);
 };
 
+const showLoaderCommentsButton = (currentComments, comments) => {
+  if (currentComments >= comments.length) {
+    loaderCommentsButton.classList.add('hidden');
+  }
+  else {
+    loaderCommentsButton.classList.remove('hidden');
+  }
+};
+
 const onThumbnailsClick = (url, likes, comments, description) => {
   const commentsNumber =  bigPictureContainer.querySelector('.social__comment-count');
   let currentComments = 5;
@@ -51,16 +60,7 @@ const onThumbnailsClick = (url, likes, comments, description) => {
   bigPictureContainer.querySelector('.likes-count').textContent = likes;
   bigPictureContainer.querySelector('.comments-count').textContent = comments.length;
   bigPictureContainer.querySelector('.social__caption').textContent = description;
-
-  if (currentComments >= comments.length) {
-    commentsNumber.classList.add('hidden');
-    loaderCommentsButton.classList.add('hidden');
-  }
-  else {
-    commentsNumber.classList.remove('hidden');
-    loaderCommentsButton.classList.remove('hidden');
-  }
-
+  showLoaderCommentsButton(currentComments, comments);
   blockComments.innerHTML = '';
   for (const comment of comments.slice(0, Math.min(currentComments, comments.length))) {
     createComment(comment.avatar,comment.name,comment.message);
@@ -70,10 +70,12 @@ const onThumbnailsClick = (url, likes, comments, description) => {
   loaderCommentsButton.addEventListener('click', () => {
     const commentsArray = comments.slice(Math.min(currentComments, comments.length), Math.min(currentComments, comments.length) + SHOW_LIMIT);
     currentComments += 5;
+    showLoaderCommentsButton(currentComments,comments);
     commentsNumber.innerHTML = `<div class="social__comment-count">${Math.min(currentComments, comments.length)} из <span class="comments-count">${comments.length}</span> комментариев</div>`;
     for (const comment of commentsArray) {
       createComment(comment.avatar,comment.name,comment.message);
     }
+    showLoaderCommentsButton(currentComments, comments);
   });
   document.addEventListener('keydown', onbigPictureContainerEscKeydown);
 };
