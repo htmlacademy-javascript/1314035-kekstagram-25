@@ -2,20 +2,10 @@ import {isEscapeKey} from './util.js';
 
 const bigPictureContainer = document.querySelector('.big-picture');
 const body = document.querySelector('body');
-// const userPictures = document.querySelectorAll('.picture__img');
 const closeFullViewPictureElement = bigPictureContainer.querySelector('.big-picture__cancel');
 const blockComments = document.querySelector('.social__comments');
-
-// / Кнопка загрузить еще (комментарии)
 const loaderCommentsButton = document.querySelector('.comments-loader');
-
-// Всего комментариев к фото
-const commentsCount = document.querySelector('.comments-count');
-
-// const hideBlockComments = () => {
-//   commentsNumber.classList.add('hidden');
-//   loaderCommentsButton.classList.add('hidden');
-// };
+const SHOW_LIMIT = 5;
 
 const closeFullViewPicture = () => {
   bigPictureContainer.classList.add('hidden');
@@ -61,16 +51,26 @@ const onThumbnailsClick = (url, likes, comments, description) => {
   bigPictureContainer.querySelector('.likes-count').textContent = likes;
   bigPictureContainer.querySelector('.comments-count').textContent = comments.length;
   bigPictureContainer.querySelector('.social__caption').textContent = description;
-  // hideBlockComments();
+
+  if (currentComments >= comments.length) {
+    commentsNumber.classList.add('hidden');
+    loaderCommentsButton.classList.add('hidden');
+  }
+  else {
+    commentsNumber.classList.remove('hidden');
+    loaderCommentsButton.classList.remove('hidden');
+  }
+
   blockComments.innerHTML = '';
-  for (const comment of comments.slice(0, currentComments)) {
+  for (const comment of comments.slice(0, Math.min(currentComments, comments.length))) {
     createComment(comment.avatar,comment.name,comment.message);
   }
-  // commentsNumber.innerHTML = '<div class="social__comment-count">`${commentsNumber}` из <span class="comments-count">`${commentsCount}`</span> комментариев</div>';
+  commentsNumber.innerHTML = `<div class="social__comment-count">${Math.min(currentComments, comments.length)} из <span class="comments-count">${comments.length}</span> комментариев</div>`;
 
   loaderCommentsButton.addEventListener('click', () => {
-    const commentsArray = comments.slice(currentComments, currentComments + 5);
+    const commentsArray = comments.slice(Math.min(currentComments, comments.length), Math.min(currentComments, comments.length) + SHOW_LIMIT);
     currentComments += 5;
+    commentsNumber.innerHTML = `<div class="social__comment-count">${Math.min(currentComments, comments.length)} из <span class="comments-count">${comments.length}</span> комментариев</div>`;
     for (const comment of commentsArray) {
       createComment(comment.avatar,comment.name,comment.message);
     }

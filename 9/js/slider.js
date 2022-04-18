@@ -72,8 +72,8 @@ const filterParams = {
       },
     },
   },
-  'marvin': { //Имя фильтра из value
-    'filterName': 'invert', //Имя фильтра для стилизации CSS
+  'marvin': {
+    'filterName': 'invert',
     'filterParameter': {
       range: {
         min: 0,
@@ -92,8 +92,8 @@ const filterParams = {
       },
     },
   },
-  'phobos': { //Имя фильтра из value
-    'filterName': 'blur', //Имя фильтра для стилизации CSS
+  'phobos': {
+    'filterName': 'blur',
     'filterParameter': {
       range: {
         min: 0,

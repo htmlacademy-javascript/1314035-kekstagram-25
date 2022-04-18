@@ -1,4 +1,3 @@
-// import {onUserModalEscKeydown, clearUserModalForm} from './user-modal.js';
 import {isEscapeKey} from './util.js';
 const body = document.querySelector('body');
 
