@@ -7,32 +7,26 @@ const getRandomPositiveInteger = (a, b) => {
   return Math.floor(result);
 };
 
-const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
-
-function checkLengthString(string, max) {
-  return (string.length <= max);
-}
-
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 const showAlert = (message) => {
-  const alertContainer = document.createElement('div');
-  alertContainer.style.zIndex = 100;
-  alertContainer.style.position = 'absolute';
-  alertContainer.style.left = 0;
-  alertContainer.style.top = 0;
-  alertContainer.style.right = 0;
-  alertContainer.style.padding = '10px 3px';
-  alertContainer.style.fontSize = '30px';
-  alertContainer.style.textAlign = 'center';
-  alertContainer.style.backgroundColor = 'gold';
+  const alertElement = document.createElement('div');
+  alertElement.style.zIndex = '100';
+  alertElement.style.position = 'absolute';
+  alertElement.style.left = '0';
+  alertElement.style.top = '0';
+  alertElement.style.right = '0';
+  alertElement.style.padding = '10px 3px';
+  alertElement.style.fontSize = '30px';
+  alertElement.style.textAlign = 'center';
+  alertElement.style.backgroundColor = 'gold';
 
-  alertContainer.textContent = message;
+  alertElement.textContent = message;
 
-  document.body.append(alertContainer);
+  document.body.append(alertElement);
 
   setTimeout(() => {
-    alertContainer.remove();
+    alertElement.remove();
   }, ALERT_SHOW_TIME);
 };
 
@@ -44,4 +38,4 @@ const debounce = (callback, timeoutDelay) => {
   };
 };
 
-export {getRandomPositiveInteger, getRandomArrayElement, checkLengthString, isEscapeKey, showAlert, debounce};
+export {getRandomPositiveInteger, isEscapeKey, showAlert, debounce};

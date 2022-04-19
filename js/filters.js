@@ -1,5 +1,5 @@
 const userFiltersElement = document.querySelector('.img-filters');
-const userFiltersButtons = document.querySelectorAll('.img-filters__button');
+const filterElement = document.querySelectorAll('.img-filters__button');
 
 const RANDOM_PHOTO_COUNT = 10;
 
@@ -18,7 +18,7 @@ const setButtonsContainerClick = (makeThumbnails, similarItems) => {
           .slice()
           .sort(getRandomThumbnails)
           .slice(0, RANDOM_PHOTO_COUNT);
-        for (const button of userFiltersButtons) {
+        for (const button of filterElement) {
           button.classList.remove('img-filters__button--active');
         }
         evt.target.classList.add('img-filters__button--active');
@@ -27,14 +27,14 @@ const setButtonsContainerClick = (makeThumbnails, similarItems) => {
         sortedData = similarItems
           .slice()
           .sort(compareComments);
-        for (const button of userFiltersButtons) {
+        for (const button of filterElement) {
           button.classList.remove('img-filters__button--active');
         }
         evt.target.classList.add('img-filters__button--active');
         break;
       case 'filter-default':
         sortedData = similarItems;
-        for (const button of userFiltersButtons) {
+        for (const button of filterElement) {
           button.classList.remove('img-filters__button--active');
         }
         evt.target.classList.add('img-filters__button--active');

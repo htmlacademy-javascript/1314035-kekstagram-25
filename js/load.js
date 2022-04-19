@@ -5,7 +5,7 @@ const getData = (onSuccess) => {
     .then((response) => response.json())
     .then((thumbnails) => {
       onSuccess(thumbnails);
-      userFiltersElement.style.opacity = 1;
+      userFiltersElement.style.opacity = '1';
     });
 };
 

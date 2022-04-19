@@ -1,13 +1,13 @@
-import {userImagePreview} from './scale-control.js';
+import {userImagePreviewElement} from './scale-control.js';
 
 // Находим родительский контейнер для всех эффектов
-const effectsContainer = document.querySelector('.img-upload__effects');
+const effectsElement = document.querySelector('.img-upload__effects');
 // Находим слайдер
 const effectsSliderElement = document.querySelector('.effect-level__slider');
 //  Находим поле, в которое записывается уровень эффекта
-const effectInputLevel = document.querySelector('.effect-level__value');
+const effectLevelElement = document.querySelector('.effect-level__value');
 // Находим подложку слайдера
-const effectLevelBack = document.querySelector('.effect-level');
+const effectLevelBackElement = document.querySelector('.effect-level');
 
 // Создаем слайдер
 noUiSlider.create(effectsSliderElement, {
@@ -140,24 +140,24 @@ effectsSliderElement.noUiSlider.on('update', () => {
   const effectInputCurrent = document.querySelector('[name="effect"]:checked');
   if (effectInputCurrent.value !== 'none') {
     const actualSliderValue = effectsSliderElement.noUiSlider.get();
-    effectInputLevel.value = parseInt(actualSliderValue, 10);
-    userImagePreview.style.filter = `${filterParams[effectInputCurrent.value].filterName}(${actualSliderValue})`;
+    effectLevelElement.value = parseInt(actualSliderValue, 10);
+    userImagePreviewElement.style.filter = `${filterParams[effectInputCurrent.value].filterName}(${actualSliderValue})`;
   }
   else {
-    effectLevelBack.classList.add('hidden');
+    effectLevelBackElement.classList.add('hidden');
   }
 });
 
 // Обработчик на выбор радио-кнопки с эффектами
-effectsContainer.addEventListener('change', (evt) => {
+effectsElement.addEventListener('change', (evt) => {
   const effectInputCurrent = document.querySelector('[name="effect"]:checked');
   if (effectInputCurrent.value !== 'none') {
     effectsSliderElement.noUiSlider.updateOptions(filterParams[evt.target.value]['filterParameter']);
-    effectLevelBack.classList.remove('hidden');
+    effectLevelBackElement.classList.remove('hidden');
   } else {
-    userImagePreview.style.filter = '';
-    effectLevelBack.classList.add('hidden');
+    userImagePreviewElement.style.filter = '';
+    effectLevelBackElement.classList.add('hidden');
   }
 });
 
-export {effectLevelBack};
+export {effectLevelBackElement};
