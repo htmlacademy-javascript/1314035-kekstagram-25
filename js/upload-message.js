@@ -5,7 +5,7 @@ const showUploadMessage = (status) => {
   const messageTemplate = document.querySelector(`#${status}`).content.querySelector(`.${status}`);
   const messageFragment = document.createDocumentFragment();
   const messageElement = messageTemplate.cloneNode(true);
-  const closeMessageButton = messageElement.querySelector(`.${status}__button`);
+  const closeMessageElement = messageElement.querySelector(`.${status}__button`);
   messageFragment.appendChild(messageElement);
   body.appendChild(messageFragment);
 
@@ -17,8 +17,8 @@ const showUploadMessage = (status) => {
     }
   };
 
-  const messageContainer = document.querySelector(`.${status}`);
-  messageContainer.style.zIndex = 100;
+  const uploadMessageElement = document.querySelector(`.${status}`);
+  uploadMessageElement.style.zIndex = '100';
   messageElement.classList.remove('hidden');
   body.classList.remove('modal-open');
   document.addEventListener('keydown', onUploadMessageEscKeydown);
@@ -35,7 +35,7 @@ const showUploadMessage = (status) => {
     }
   });
 
-  closeMessageButton.addEventListener('click', () => {
+  closeMessageElement.addEventListener('click', () => {
     closeUploadMessage();
     document.body.lastChild.remove();
     document.removeEventListener('keydown', onUploadMessageEscKeydown);

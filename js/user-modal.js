@@ -1,7 +1,7 @@
 import {isEscapeKey} from './util.js';
-import {hashtagsInput} from './user-form.js';
-import {userImagePreview} from './scale-control.js';
-import {effectLevelBack} from './slider.js';
+import {hashtagsElement} from './user-form.js';
+import {userImagePreviewElement} from './scale-control.js';
+import {effectLevelBackElement} from './slider.js';
 
 // Находим форму для загрузки изображения на сайт
 const form = document.querySelector('.img-upload__form');
@@ -18,15 +18,15 @@ const userModalFormElement = form.querySelector('.img-upload__overlay');
 // Находим кнопку закрытия формы
 const userModalCloseElement = form.querySelector('.img-upload__cancel');
 
-const commentInput = form.querySelector('.text__description');
+const commentElement = form.querySelector('.text__description');
 
-const preview = document.querySelector('.img-upload__preview img');
+const uploadPreviewElement = document.querySelector('.img-upload__preview img');
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
 const onUserModalEscKeydown = (evt) => {
   // отменяем обработчик Esc при фокусе
-  const selectedInput = document.activeElement;
-  if (isEscapeKey(evt) && selectedInput !== hashtagsInput && selectedInput !== commentInput) {
+  const selectedElement = document.activeElement;
+  if (isEscapeKey(evt) && selectedElement !== hashtagsElement && selectedElement !== commentElement) {
     evt.preventDefault();
   }
 };
@@ -34,8 +34,8 @@ const onUserModalEscKeydown = (evt) => {
 //Сбрасываем значение поля выбора файла #upload-file
 const clearUserModalForm = () => {
   form.reset();
-  userImagePreview.style = '';
-  effectLevelBack.classList.add('hidden');
+  userImagePreviewElement.style = '';
+  effectLevelBackElement.classList.add('hidden');
 };
 
 //Функция для показа окна
@@ -60,7 +60,7 @@ userControlElement.addEventListener('change', () => {
   const fileName = file.name.toLowerCase();
   const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
   if (matches) {
-    preview.src = URL.createObjectURL(file);
+    uploadPreviewElement.src = URL.createObjectURL(file);
   }
   openUserModal();
 });

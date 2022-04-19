@@ -10,10 +10,10 @@ const re = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 const form = document.querySelector('.img-upload__form');
 
 // Находим кнопку "опубликовать"
-const submitButton = form.querySelector('.img-upload__submit');
+const submitElement = form.querySelector('.img-upload__submit');
 
 //Находим поле хэштегов
-const hashtagsInput = form.querySelector('.text__hashtags');
+const hashtagsElement = form.querySelector('.text__hashtags');
 
 //Функция проверки
 const pristine = new Pristine(form, {
@@ -25,18 +25,18 @@ const pristine = new Pristine(form, {
   errorTextClass: 'img-upload__error' // Класс для элемента с текстом ошибки
 });
 
-const blockSubmitButton = () => {
-  submitButton.disabled = true;
-  submitButton.textContent = 'Публикую...';
+const blockSubmitElement = () => {
+  submitElement.disabled = true;
+  submitElement.textContent = 'Публикую...';
 };
 
-const unblockSubmitButton = () => {
-  submitButton.disabled = false;
-  submitButton.textContent = 'Опубликовать';
+const unblockSubmitElement = () => {
+  submitElement.disabled = false;
+  submitElement.textContent = 'Опубликовать';
 };
 
 // хэш-теги нечувствительны к регистру;
-hashtagsInput.value.toLowerCase();
+hashtagsElement.value.toLowerCase();
 
 // Функция проверки регулярного выражения
 const validateReg = (value) => {
@@ -82,16 +82,16 @@ const setUserFormSubmit = (onSuccess) => {
     evt.preventDefault();
     const isValid = pristine.validate();
     if (isValid) {
-      blockSubmitButton();
+      blockSubmitElement();
       sendData(
         () => {
           onSuccess();
-          unblockSubmitButton();
+          unblockSubmitElement();
           showUploadMessage('success');
         },
         () => {
           showAlert('Не удалось опубликовать фотографию. Попробуйте ещё раз');
-          unblockSubmitButton();
+          unblockSubmitElement();
           showUploadMessage('error');
         },
         new FormData(evt.target),
@@ -100,4 +100,4 @@ const setUserFormSubmit = (onSuccess) => {
   });
 };
 
-export {hashtagsInput, setUserFormSubmit};
+export {hashtagsElement, setUserFormSubmit};
